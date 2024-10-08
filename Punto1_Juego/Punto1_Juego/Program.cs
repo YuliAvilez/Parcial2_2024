@@ -18,13 +18,13 @@
 
         switch (numeroJugadores)
         {
-            case 2:
+            case 1:
                 numeroAleatorio = random.Next(0, 50);
                 break;
-            case 3:
+            case 2:
                 numeroAleatorio = random.Next(0, 100);
                 break;
-            case 4:
+            case 3:
                 numeroAleatorio = random.Next(0, 200);
                 break;
         }
