@@ -3,21 +3,65 @@
     static void Main()
     {
         // Asignación de variables
-        int NumJugadores, RangoMax = 50, NumObjetivo;
-        bool JuegoGanado = false;
+        int numeroJugadores = 0;
+        Random random = new Random();
+        int numeroAleatorio = 0;
+        bool juegoActivo = true;
 
-        Console.Write(" Ingresa el número de jugadores (2-4): ");
-        NumJugadores = int.Parse(Console.ReadLine());
+        Console.WriteLine("Bienvenido al juego de 'Adivina el número'!");
 
-        if (NumJugadores == 3)
+        while (numeroJugadores < 2 || numeroJugadores > 4)
         {
-            RangoMax = 100;
+            Console.Write("Ingrese el número de jugadores (entre 2 y 4): ");
+            numeroJugadores = int.Parse(Console.ReadLine());
         }
-        else if (NumJugadores == 4)
+
+        switch (numeroJugadores)
         {
-            RangoMax = 200;
+            case 2:
+                numeroAleatorio = random.Next(0, 51);
+                break;
+            case 3:
+                numeroAleatorio = random.Next(0, 101);
+                break;
+            case 4:
+                numeroAleatorio = random.Next(0, 201);
+                break;
         }
-            Random random = new Random();
-        NumObjetivo = random.Next(0,RangoMax + 1);
+
+        while (juegoActivo)
+        {
+            for (int i = 1; i <= numeroJugadores; i++)
+            {
+                Console.Write($"Jugador {i}, ingrese su adivinanza: ");
+                int intento = int.Parse(Console.ReadLine());
+
+                if (intento < numeroAleatorio)
+                {
+                    Console.WriteLine("MAYOR");
+                }
+                else if (intento > numeroAleatorio)
+                {
+                    Console.WriteLine("MENOR");
+                }
+                else
+                {
+                    Console.WriteLine("¡HAS GANADO!");
+                    juegoActivo = false;
+                    break;
+                }
+            }
+
+            if (juegoActivo)
+            {
+                Console.Write("¿Quieren jugar otra ronda? (s/n): ");
+                if (Console.ReadLine().ToLower() != "s")
+                {
+                    juegoActivo = false;
+                }
+            }
+        }
+
+        Console.WriteLine("Gracias por jugar. ¡Hasta la próxima!");
     }
 }
